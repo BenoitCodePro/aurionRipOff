@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="AurionRipOff:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/AurionRipOff_jar</output-path>
+    <root id="archive" name="AurionRipOff.jar">
+      <element id="module-output" name="AurionRipOff" />
+    </root>
+  </artifact>
+</component>
