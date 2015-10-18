@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 /**
  * Created by plesur on 10/17/15.
+ * Abstract class that represents a person.
+ * Attributes are first name and surname (as of now)
  */
 abstract public class Person implements Serializable {
 
@@ -12,8 +14,8 @@ abstract public class Person implements Serializable {
 
     /**
      * Basic constructor that children can super()
-     * @param surName_
-     * @param firstName_
+     * @param surName_ surname of the person
+     * @param firstName_ first name of the person
      */
     Person(String firstName_, String surName_) {
         surName = surName_;
@@ -25,10 +27,10 @@ abstract public class Person implements Serializable {
      * @param class_ the class the person might attend to
      * @return if the person is expected to be at the class
      */
-    boolean attends(Class class_) {
+    /*boolean attends(Class class_) {
         //return class_.expects(this);
         return true;
-    }
+    }*/
 
     /**
      * Simply display the basic information about a person.

@@ -4,10 +4,12 @@ import java.util.Scanner;
 
 /**
  * Created by plesur on 10/17/15.
+ * This class simply reads the user input til we know what he wants exactly.
+ * We then call the corresponding CommandExecutor method with the rest of the parameters as a scanner object.
+ * Error message are displayed as needed.
  */
 public class InputParser {
 
-    final static String WRONG_COMMAND = "Wrong usage of the command. Please see the help function.\n";
     CommandExecutor commandExecutor;
 
     public InputParser() {
@@ -19,13 +21,11 @@ public class InputParser {
      * @param userInput the line sent by the user
      */
     public void parse(String userInput) {
-
         Scanner line = new Scanner(userInput);
-        String command;
-
         if(line.hasNext()) {
-            switch ((command = line.next())) {
+            switch (line.next()) {
                 case "help":
+                    help(line);
                     break;
                 case "delete":
                     break;
@@ -63,11 +63,35 @@ public class InputParser {
                     commandExecutor.addStudent(line);
                     break;
                 default:
-                    System.out.print(WRONG_COMMAND);
+                    Constants.wrong_command_usage();
                     break;
             }
         } else {
-            System.out.print(WRONG_COMMAND);
+            Constants.wrong_command_usage();
+        }
+    }
+
+    /**
+     * Is called when we parsed the word "help" as a command. Take the rest of the user input as a parameter to choose which help to display.
+     *
+     * @param line the scanner containing the rest of the user input
+     */
+    void help(Scanner line) {
+        if (line.hasNext()) {
+            String helpAsked = line.next();
+            switch (helpAsked) {
+                case "add":
+                    Constants.help_add();
+                    break;
+                case "serialize":
+                    Constants.help_serialize();
+                    break;
+                default:
+                    Constants.help_main();
+                    break;
+            }
+        } else {
+            Constants.help_main();
         }
     }
 

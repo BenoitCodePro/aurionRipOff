@@ -2,6 +2,8 @@ package com.crysteo.Persons;
 
 /**
  * Created by plesur on 10/17/15.
+ * Inherits from Person
+ * It has a promotion number.
  */
 public class Student extends Person {
 
