@@ -2,6 +2,7 @@ package com.crysteo;
 
 import com.crysteo.Persons.Person;
 import com.crysteo.Persons.Student;
+import com.crysteo.Persons.Teacher;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -79,7 +80,25 @@ public class CommandExecutor {
             String firstName = line.next();
             String surName = line.next();
             int promotion = Integer.parseInt(line.next());
-            entities.add(new Student(firstName,surName,promotion));
+            String rfidID = line.next();
+            entities.add(new Student(firstName, surName, promotion, rfidID));
+        } catch (NoSuchElementException e) {
+            Constants.wrong_command_usage();
+        }
+    }
+
+    /**
+     * function to add a teacher to the arrayList of persons. It use a try/catch because there are no more options from the user, only data
+     *
+     * @param line the rest of the user's input. Once again, it starts at the 2nd value (first two ones being "add teacher")
+     */
+    public void addTeacher(Scanner line) {
+        try {
+            String firstName = line.next();
+            String surName = line.next();
+            String officeRoom = line.next();
+            String rfidID = line.next();
+            entities.add(new Teacher(firstName, surName, officeRoom, rfidID));
         } catch (NoSuchElementException e) {
             Constants.wrong_command_usage();
         }

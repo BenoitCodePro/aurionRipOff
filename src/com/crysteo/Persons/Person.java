@@ -11,16 +11,18 @@ abstract public class Person implements Serializable {
 
     String surName;
     String firstName;
-
+    String rfidID;
     /**
      * Basic constructor that children can super()
      * @param surName_ surname of the person
      * @param firstName_ first name of the person
      */
-    Person(String firstName_, String surName_) {
+    Person(String firstName_, String surName_, String rfidID_) {
         surName = surName_;
         firstName = firstName_;
+        rfidID = rfidID_;
     }
+
 
     /**
      * Returns true if the person is supposed to go at the given class
@@ -36,7 +38,11 @@ abstract public class Person implements Serializable {
      * Simply display the basic information about a person.
      * It is abstract because those information depend on the type of person.
      */
-    abstract public void display();
+    public void display() {
+        System.out.print("\nFirst name: " + firstName +
+                "\nSurname: " + surName +
+                "\nRFID ID: " + rfidID + "\n");
+    }
 
 
 }

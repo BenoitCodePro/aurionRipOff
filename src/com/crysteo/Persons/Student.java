@@ -9,15 +9,14 @@ public class Student extends Person {
 
     int promotion;
 
-    public Student(String firstName,String surName,int promotion_) {
-        super(firstName,surName);
+    public Student(String firstName, String surName, int promotion_, String rfidID_) {
+        super(firstName, surName, rfidID_);
         promotion = promotion_;
     }
 
     @Override
     public void display() {
-        System.out.print("\nFirst name: " + firstName +
-                        "\nSurname: " + surName +
-                        "\nPromotion: " + promotion + "\n");
+        super.display();
+        System.out.print("Promotion: " + promotion + "\n");
     }
 }

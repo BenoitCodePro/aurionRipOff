@@ -57,7 +57,7 @@ public class InputParser {
             String typeOfAdd = line.next();
             switch (typeOfAdd) {
                 case "teacher":
-                    //commandExecutor.addTeacher(line);
+                    commandExecutor.addTeacher(line);
                     break;
                 case "student":
                     commandExecutor.addStudent(line);
