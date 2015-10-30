@@ -10,18 +10,19 @@ import java.util.Scanner;
  */
 public class InputParser {
 
-    CommandExecutor commandExecutor;
+    private CommandExecutor commandExecutor;
+    private Scanner scanner;
 
-    public InputParser() {
+    public InputParser(Scanner scanner_) {
         commandExecutor = new CommandExecutor();
+        scanner = scanner_;
     }
 
     /**
      * Stat the core of the program, which is to read the user's inputs then react
-     * @param userInput the line sent by the user
      */
-    public void parse(String userInput) {
-        Scanner line = new Scanner(userInput);
+    public void parse() {
+        Scanner line = new Scanner(scanner.nextLine());
         if(line.hasNext()) {
             switch (line.next()) {
                 case "help":
@@ -57,11 +58,13 @@ public class InputParser {
             String typeOfAdd = line.next();
             switch (typeOfAdd) {
                 case "teacher":
-                    commandExecutor.addTeacher(line);
+                    commandExecutor.addTeacher(scanner);
                     break;
                 case "student":
-                    commandExecutor.addStudent(line);
+                    commandExecutor.addStudent(scanner);
                     break;
+                case "lesson":
+                    commandExecutor.addLesson(scanner);
                 default:
                     Constants.wrong_command_usage();
                     break;

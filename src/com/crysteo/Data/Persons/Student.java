@@ -1,4 +1,4 @@
-package com.crysteo.Persons;
+package com.crysteo.Data.Persons;
 
 /**
  * Created by plesur on 10/17/15.
@@ -7,7 +7,7 @@ package com.crysteo.Persons;
  */
 public class Student extends Person {
 
-    int promotion;
+    private int promotion;
 
     public Student(String firstName, String surName, int promotion_, String rfidID_) {
         super(firstName, surName, rfidID_);
@@ -15,8 +15,8 @@ public class Student extends Person {
     }
 
     @Override
-    public void display() {
-        super.display();
+    public void displayInfo() {
+        super.displayInfo();
         System.out.print("Promotion: " + promotion + "\n");
     }
 }

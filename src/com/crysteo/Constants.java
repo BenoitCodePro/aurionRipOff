@@ -8,51 +8,51 @@ package com.crysteo;
  */
 public class Constants {
 
-    static final String AURIONRIPOFF_INTRO = "Welcome to Aurion Rip-Off !\n" +
+    private static final String AURIONRIPOFF_INTRO = "Welcome to Aurion Rip-Off !\n" +
             "Please use on of the following command (type help command for more information).\n" +
             "You can exit this program with the EOF char (^D).\n\n";
-    static final String WRONG_COMMAND_USAGE = "Wrong usage of the command. Please see the help function.\n";
-    static final String HELP_MAIN = "The different commands that exist are:\n" +
+    private static final String WRONG_COMMAND_USAGE = "Wrong usage of the command. Please see the help function.\n";
+    private static final String HELP_MAIN = "The different commands that exist are:\n" +
             "help - display this help\n" +
             "add ELEMENT\n" +
             "serialize FILEPATH\n" +
             "deserialize FILEPATH\n" +
             "display\n" +
             "\tTo learn more about a command simply type \"help name_of_the_command\".\n";
-    static final String HELP_ADD = "The add command allows you to add a teacher/student/class by typing \"add student\" for example.\n" +
+    private static final String HELP_ADD = "The add command allows you to add a teacher/student/class by typing \"add student\" for example.\n" +
             "Here are the parameters necessary to add each of those elements:\n" +
             "Student:\n\tfirst name ; surname ; promotion (just a number)\n" +
             "Teacher:\n\tfirst name ; surname ; office room (full name)\n" +
             "Class:\n\t TO BE DEFINED\n";
-    static final String HELP_SERIALIZE = "The command serialize allows you to serialize all the students/teachers/classes you created.\n" +
+    private static final String HELP_SERIALIZE = "The command serialize allows you to serialize all the students/teachers/classes you created.\n" +
             "The first (and only) argument is the path of the file you want to save the objects to.\n" +
             "Example:\n\tserialize /home/user/aurionRipOffObjects.ser\n";
-    static int lineCount = 0;
+    private static int lineCount = 0;
 
     private Constants() {
     }
 
-    static void wrong_command_usage() {
+    public static void wrong_command_usage() {
         System.out.print(WRONG_COMMAND_USAGE);
     }
 
-    static void help_main() {
+    public static void help_main() {
         System.out.print(HELP_MAIN);
     }
 
-    static void help_add() {
+    public static void help_add() {
         System.out.print(HELP_ADD);
     }
 
-    static void help_serialize() {
+    public static void help_serialize() {
         System.out.print(HELP_SERIALIZE);
     }
 
-    static void present_software() {
+    public static void present_software() {
         System.out.print((AURIONRIPOFF_INTRO));
     }
 
-    static void new_line() {
+    public static void new_line() {
         System.out.print(++lineCount + "> ");
     }
 }

@@ -1,11 +1,12 @@
 package com.crysteo;
 
-import com.crysteo.Persons.Person;
-import com.crysteo.Persons.Student;
-import com.crysteo.Persons.Teacher;
+import com.crysteo.Data.Lesson;
+import com.crysteo.Data.Persons.Person;
+import com.crysteo.Data.Persons.Student;
+import com.crysteo.Data.Persons.Teacher;
+import com.crysteo.Data.SerializingWrapper;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -17,11 +18,11 @@ import java.util.Scanner;
  */
 public class CommandExecutor {
 
-    ArrayList<Person> entities;
+    private SerializingWrapper serializingWrapper;
 
-        public CommandExecutor() {
-            entities = new ArrayList<>();
-        }
+    public CommandExecutor() {
+        serializingWrapper = new SerializingWrapper();
+    }
 
     /**
      * Write (serialize) to the file's path from the given scanner argument
@@ -34,7 +35,7 @@ public class CommandExecutor {
             String filePath = line.next();
             try {
                 FileOutputStream fileStream = new FileOutputStream(filePath);
-                (new ObjectOutputStream(fileStream)).writeObject(entities);
+                (new ObjectOutputStream(fileStream)).writeObject(serializingWrapper);
                 fileStream.close();
             } catch (IOException e) {
                 System.out.print("Problem serializing to the file.\n" +
@@ -59,7 +60,7 @@ public class CommandExecutor {
             String filePath = line.next();
             try {
                 FileInputStream fileStream = new FileInputStream(filePath);
-                entities = (ArrayList<Person>) (new ObjectInputStream(fileStream)).readObject();
+                serializingWrapper = (SerializingWrapper) (new ObjectInputStream(fileStream)).readObject();
                 fileStream.close();
             } catch (IOException | ClassNotFoundException e) {
                 System.out.print("Problem serializing from the file.\n" +
@@ -73,43 +74,112 @@ public class CommandExecutor {
 
     /**
      * function to add a student to the arrayList of persons. It use a try/catch because there are no more options from the user, only data
-     * @param line the rest of the user's input. Once again, it starts at the 2nd value (first two ones being "add student")
+     * @param scanner the main scanner used for the inputs. We need to use it directly otherwise the main scanner still has the user inputs which would make no sense
      */
-    public void addStudent(Scanner line) {
-        try {
-            String firstName = line.next();
-            String surName = line.next();
-            int promotion = Integer.parseInt(line.next());
-            String rfidID = line.next();
-            entities.add(new Student(firstName, surName, promotion, rfidID));
-        } catch (NoSuchElementException e) {
-            Constants.wrong_command_usage();
+    public void addStudent(Scanner scanner) {
+        String firstName = "placeholder";
+        String surname = "placeholder";
+        int promotion = -1;
+        String rfidId = "placeholder";
+
+        for (int i = 0; i < 4; i++) {
+            switch (i) {
+                case 0:
+                    System.out.print("\nFirst name:");
+                    if (scanner.hasNext()) {
+                        firstName = scanner.next();
+                    }
+                    break;
+                case 1:
+                    System.out.print("Surname:");
+                    if (scanner.hasNext()) {
+                        surname = scanner.next();
+                    }
+                    break;
+                case 2:
+                    System.out.print("Promotion:");
+                    if (scanner.hasNext()) {
+                        promotion = Integer.parseInt(scanner.next());
+                    }
+                    break;
+                case 3:
+                    System.out.print("RFID ID:");
+                    if (scanner.hasNext()) {
+                        rfidId = scanner.next();
+                        scanner.nextLine();
+                    }
+                    break;
+            }
         }
+        serializingWrapper.getPersons().add(new Student(firstName, surname, promotion, rfidId));
     }
 
     /**
      * function to add a teacher to the arrayList of persons. It use a try/catch because there are no more options from the user, only data
-     *
-     * @param line the rest of the user's input. Once again, it starts at the 2nd value (first two ones being "add teacher")
+     * @param scanner the main scanner used for the inputs. We need to use it directly otherwise the main scanner still has the user inputs which would make no sense
      */
-    public void addTeacher(Scanner line) {
-        try {
-            String firstName = line.next();
-            String surName = line.next();
-            String officeRoom = line.next();
-            String rfidID = line.next();
-            entities.add(new Teacher(firstName, surName, officeRoom, rfidID));
-        } catch (NoSuchElementException e) {
-            Constants.wrong_command_usage();
+    public void addTeacher(Scanner scanner) {
+        String firstName = "placeholder";
+        String surname = "placeholder";
+        String officeRoom = "placeholder";
+        String rfidId = "placeholder";
+
+        for (int i = 0; i < 4; i++) {
+            switch (i) {
+                case 0:
+                    System.out.print("\nFirst name:");
+                    if (scanner.hasNext()) {
+                        firstName = scanner.next();
+                    }
+                    break;
+                case 1:
+                    System.out.print("Surname:");
+                    if (scanner.hasNext()) {
+                        surname = scanner.next();
+                    }
+                    break;
+                case 2:
+                    System.out.print("Promotion:");
+                    if (scanner.hasNext()) {
+                        officeRoom = scanner.next();
+                    }
+                    break;
+                case 3:
+                    System.out.print("RFID ID:");
+                    if (scanner.hasNext()) {
+                        rfidId = scanner.next();
+                        scanner.nextLine();
+                    }
+                    break;
+            }
+        }
+        serializingWrapper.getPersons().add(new Teacher(firstName, surname, officeRoom, rfidId));
+    }
+
+    /**
+     * simply calls all the displayInfo() method of all objects
+     */
+    public void displayAll() {
+        for (Person person : serializingWrapper.getPersons()) {
+            person.displayInfo();
+        }
+        for (Lesson lesson : serializingWrapper.getLessons()) {
+            lesson.displayInfo();
         }
     }
 
     /**
-     * simply calls all the display function of all existing persons
+     * TODO update with scanner and not line
+     *
+     * @param line
      */
-    public void displayAll() {
-        for(Person person : entities) {
-            person.display();
+    public void addLesson(Scanner line) {
+        try {
+            String topicName = line.next();
+            String roomName = line.next();
+            serializingWrapper.getLessons().add(new Lesson(topicName, roomName));
+        } catch (NoSuchElementException e) {
+            Constants.wrong_command_usage();
         }
     }
 }

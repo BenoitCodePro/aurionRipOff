@@ -1,4 +1,6 @@
-package com.crysteo.Persons;
+package com.crysteo.Data.Persons;
+
+import com.crysteo.Data.Displayable;
 
 import java.io.Serializable;
 
@@ -7,18 +9,19 @@ import java.io.Serializable;
  * Abstract class that represents a person.
  * Attributes are first name and surname (as of now)
  */
-abstract public class Person implements Serializable {
+abstract public class Person implements Serializable, Displayable {
 
-    String surName;
-    String firstName;
-    String rfidID;
+    private String surname;
+    private String firstName;
+    private String rfidID;
+
     /**
      * Basic constructor that children can super()
-     * @param surName_ surname of the person
+     * @param surname_ surname of the person
      * @param firstName_ first name of the person
      */
-    Person(String firstName_, String surName_, String rfidID_) {
-        surName = surName_;
+    Person(String firstName_, String surname_, String rfidID_) {
+        surname = surname_;
         firstName = firstName_;
         rfidID = rfidID_;
     }
@@ -38,11 +41,17 @@ abstract public class Person implements Serializable {
      * Simply display the basic information about a person.
      * It is abstract because those information depend on the type of person.
      */
-    public void display() {
+    public void displayInfo() {
         System.out.print("\nFirst name: " + firstName +
-                "\nSurname: " + surName +
+                "\nSurname: " + surname +
                 "\nRFID ID: " + rfidID + "\n");
     }
 
+    public String getSurname() {
+        return surname;
+    }
 
+    public String getFirstName() {
+        return firstName;
+    }
 }

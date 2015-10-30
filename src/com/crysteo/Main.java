@@ -6,12 +6,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        InputParser inputParser = new InputParser();
         Scanner scanner = new Scanner(System.in);
+        InputParser inputParser = new InputParser(scanner);
         Constants.present_software();
         Constants.new_line();
         while(scanner.hasNextLine()) {
-            inputParser.parse(scanner.nextLine());
+            inputParser.parse();
             Constants.new_line();
         }
     }
